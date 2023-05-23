@@ -5,10 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class FileDescription {
+public class ExecutableScript {
     private String scriptName;
-    private InputType inputType;
-    private RequestType requestType;
     private List<String> arguments;
-    private String description;
 }

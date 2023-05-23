@@ -2,28 +2,32 @@ package pl.wawrzyniak.przemko.EasyIoT.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.wawrzyniak.przemko.EasyIoT.Model.FileDescription;
 import pl.wawrzyniak.przemko.EasyIoT.Repository.FileManagerRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class FileManagerService {
     private FileManagerRepository fileRepository;
     private ObjectMapper objectMapper = new ObjectMapper();
+
     @Autowired
-    FileManagerService(FileManagerRepository fileManagerRepository){
+    FileManagerService(FileManagerRepository fileManagerRepository) {
         this.fileRepository = fileManagerRepository;
     }
 
     public List<FileDescription> getAvailableScripts() throws IOException {
-        List<FileDescription> availableScripts = null;
+        List<FileDescription> availableScripts = new ArrayList<>();
         List<File> scripts = fileRepository.getScripts();
         List<File> descriptions = fileRepository.getDescriptions();
         for (File script : scripts) {
             for (File description : descriptions) {
-                if (getBaseName(script.getName()) == getBaseName(description.getName())) {
+                if (getBaseName(script.getName()).equals(getBaseName(description.getName()))) {
                     FileDescription fileDescription = objectMapper.readValue(description, FileDescription.class);
                     availableScripts.add(fileDescription);
                 }
@@ -32,7 +36,7 @@ public class FileManagerService {
         return availableScripts;
     }
 
-    private String getBaseName(String fileName){
+    private String getBaseName(String fileName) {
         int index = fileName.lastIndexOf('.');
         if (index == -1) {
             return fileName;
