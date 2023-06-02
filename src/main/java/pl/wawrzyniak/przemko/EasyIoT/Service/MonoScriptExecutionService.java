@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MonoScriptExecutionService {
+public class MonoScriptExecutionService implements ScriptExecution {
     @Value("${file.scriptPath}")
     private String scriptPath;
 
@@ -25,11 +25,11 @@ public class MonoScriptExecutionService {
         monoReader = monoScriptOutputReader;
     }
 
-    public ScriptOutput executeScript(ExecutableScript script) throws IOException {
+    public ScriptOutput execute(ExecutableScript script) throws IOException {
         List<String> processCli = new ArrayList<>();
         processCli.add(interpreter);
         processCli.add("-u");
-        processCli.add(scriptPath + script.getScriptName());
+        processCli.add(scriptPath + script.getScriptName() + ".py");
         if(script.getArguments() != null) {
             processCli.addAll(script.getArguments());
         }

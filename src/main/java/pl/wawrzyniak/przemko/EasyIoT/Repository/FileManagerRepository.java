@@ -16,7 +16,7 @@ public class FileManagerRepository {
 
     public List<File> getScripts() {
         File dir = new File(scriptPath);
-        File[] files = dir.listFiles((dir1, name) -> name.endsWith(".py"));
+        File[] files = dir.listFiles((dir1, name) -> name.endsWith("hello.py"));
         if (files == null) {
             return new ArrayList<>();
         }
