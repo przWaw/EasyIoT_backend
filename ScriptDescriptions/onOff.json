@@ -1,0 +1,7 @@
+{
+  "scriptName": "onOff",
+  "inputType": "ON_OFF",
+  "requestType": "MONO",
+  "arguments": ["-n"],
+  "description": "Simple script for testing"
+}

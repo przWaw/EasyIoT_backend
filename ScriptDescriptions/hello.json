@@ -1,0 +1,7 @@
+{
+  "scriptName": "hello",
+  "inputType": "NO_ARGS",
+  "requestType": "MONO",
+  "arguments": null,
+  "description": "Simple script for testing"
+}
